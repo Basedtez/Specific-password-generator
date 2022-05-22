@@ -83,6 +83,10 @@ function generatePassword() {
   if (userIncludesSpecial) {
     optionsSelect.push(specialList)
   }
+
+  if (optionsSelect.length === 0) {
+    optionsSelect.push(numberList)
+  }
  
 
   var generatedPassword = ""
@@ -90,8 +94,9 @@ function generatePassword() {
   for (var i = 0; i < passwordLength; i++) {
     var randomList = getRandomSelect(optionsSelect)
     var randomChar = getRandomSelect(randomList)
-    console.log(randomChar)
+    generatedPassword += randomChar
   }
+ 
  
 
  
