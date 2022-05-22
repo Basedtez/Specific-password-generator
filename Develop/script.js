@@ -25,6 +25,19 @@
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
 
+function randomInt(min, max) {
+  if (!max) {
+    max= min
+    min = 0
+  }
+  var rand = Math.random()
+  return Math.floor(min*(1 - rand) + rand*max)
+}
+
+function getRandomSelect(list) {
+  return list[randomInt(list.length)]
+}
+
 function generatePassword() {
 
   var userInput = window.prompt("Desired password length?")
@@ -42,11 +55,44 @@ function generatePassword() {
     return
   }
 
-  var userWantsNumbers = window.confirm("Would you like your password to include numbers?")
-  var userWantsLowercase = window.confirm("Would you like your password to include lowercase letters?")
-  var userWantsUppercase = window.confirm("Would you like your password to include uppercase letters?")
-  var userWantsSpecial = window.confirm("Would you like your password to include special characters?")
+  var userIncludesNumbers = window.confirm("Would you like your password to include numbers?")
+  var userIncludesLowercase = window.confirm("Would you like your password to include lowercase letters?")
+  var userIncludesUppercase = window.confirm("Would you like your password to include uppercase letters?")
+  var userIncludesSpecial = window.confirm("Would you like your password to include special characters?")
 
+  var numberList = ["0","1","2","3","4","5","6","7","8","9","10"]
+  var lowercaseList = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","y","x","z",]
+  var uppercaseList = []
+  var specialList = ["!","@","#","^","&","*","(",")","{","}","[", "]","=","<",">",",","."]
+
+  var optionsSelect = []
+
+  for (var i = 0; i < lowercaseList.length; i++) {
+    uppercaseList[i] = lowercaseList[i].toUpperCase
+  }
+
+  if (userIncludesNumbers) {
+    optionsSelect.push(numberList)
+  }
+  if (userIncludesLowercase) {
+    optionsSelect.push(lowercaseList)
+  }
+  if (userIncludesUppercase) {
+    optionsSelect.push(uppercaseList)
+  }
+  if (userIncludesSpecial) {
+    optionsSelect.push(specialList)
+  }
+ 
+
+  var generatedPassword = ""
+
+  for (var i = 0; i < passwordLength; i++) {
+    var randomList = getRandomSelect(optionsSelect)
+    var randomChar = getRandomSelect(randomList)
+    console.log(randomChar)
+  }
+ 
 
  
 }
